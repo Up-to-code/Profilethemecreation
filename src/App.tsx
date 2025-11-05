@@ -3,8 +3,8 @@ import { Button } from "./components/ui/button";
 import { ProjectCard } from "./components/ProjectCard";
 import { SkillBadge } from "./components/SkillBadge";
 import { CertificateCard } from "./components/CertificateCard";
-import { TestimonialCard } from "./components/TestimonialCard";
-import { Github, Linkedin, Mail, Twitter, Code2, Database, Layout, Smartphone, Server, Palette } from "lucide-react";
+import { TestimonialsSlider } from "./components/TestimonialsSlider";
+import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 
 export default function App() {
   const projects = [
@@ -39,14 +39,18 @@ export default function App() {
   ];
 
   const skills = [
-    { name: "React & Next.js", icon: Code2, level: "متقدم" },
-    { name: "TypeScript", icon: Code2, level: "متقدم" },
-    { name: "Node.js", icon: Server, level: "متوسط" },
-    { name: "قواعد البيانات", icon: Database, level: "متقدم" },
-    { name: "تصميم الواجهات", icon: Layout, level: "متقدم" },
-    { name: "تطوير الموبايل", icon: Smartphone, level: "متوسط" },
-    { name: "Tailwind CSS", icon: Palette, level: "متقدم" },
-    { name: "Git & GitHub", icon: Code2, level: "متقدم" }
+    "React & Next.js",
+    "TypeScript",
+    "Node.js",
+    "قواعد البيانات",
+    "تصميم الواجهات",
+    "تطوير الموبايل",
+    "Tailwind CSS",
+    "Git & GitHub",
+    "JavaScript",
+    "MongoDB",
+    "REST APIs",
+    "Responsive Design"
   ];
 
   const certificates = [
@@ -97,37 +101,64 @@ export default function App() {
   const socialLinks = [
     { icon: Github, href: "https://github.com", label: "GitHub" },
     { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: Mail, href: "mailto:your@email.com", label: "Email" }
+    { icon: Twitter, href: "https://twitter.com", label: "X" },
+    { icon: Mail, href: "mailto:your@email.com", label: "البريد" }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20" dir="rtl">
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        {/* Profile Section */}
-        <div className="text-center mb-16">
-          <Avatar className="w-32 h-32 mx-auto mb-6 ring-4 ring-primary/10">
-            <AvatarImage src="https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYyMzA5NTUyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" />
-            <AvatarFallback>محمد</AvatarFallback>
-          </Avatar>
-          
-          <h1 className="mb-3">محمد أحمد</h1>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            مطور ويب متخصص في بناء تطبيقات حديثة ومواقع إلكترونية متجاوبة باستخدام أحدث التقنيات
-          </p>
+    <div className="min-h-screen bg-background">
+      {/* Banner Section */}
+      <div className="relative w-full h-52 bg-gradient-to-br from-blue-500/90 via-purple-500/90 to-pink-500/90">
+        <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
+      </div>
 
-          {/* Social Links */}
-          <div className="flex gap-3 justify-center flex-wrap">
+      {/* Main Container */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Profile Section */}
+        <div className="relative -mt-20 pb-6 border-b">
+          <div className="flex items-end justify-between mb-6 flex-row-reverse">
+            <Avatar className="w-36 h-36 ring-4 ring-background">
+              <AvatarImage src="https://images.unsplash.com/photo-1719400471588-575b23e27bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYyMzA5NTUyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" />
+              <AvatarFallback>محمد</AvatarFallback>
+            </Avatar>
+            
+            {/* Social Links - Desktop */}
+            <div className="hidden sm:flex gap-2 mb-2 flex-row-reverse">
+              {socialLinks.map((social) => (
+                <Button
+                  key={social.label}
+                  variant="outline"
+                  size="icon"
+                  asChild
+                  className="rounded-full hover:bg-secondary"
+                >
+                  <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
+                    <social.icon className="w-4 h-4" />
+                  </a>
+                </Button>
+              ))}
+            </div>
+          </div>
+          
+          <div className="text-right mb-4">
+            <h1 className="mb-1">محمد أحمد</h1>
+            <p className="text-muted-foreground">
+              مطور ويب متخصص في بناء تطبيقات حديثة ومواقع إلكترونية متجاوبة
+            </p>
+          </div>
+
+          {/* Social Links - Mobile */}
+          <div className="flex sm:hidden gap-2 mb-4 flex-row-reverse">
             {socialLinks.map((social) => (
               <Button
                 key={social.label}
                 variant="outline"
                 size="icon"
                 asChild
-                className="hover:scale-110 transition-transform"
+                className="rounded-full hover:bg-secondary"
               >
                 <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4" />
                 </a>
               </Button>
             ))}
@@ -135,19 +166,19 @@ export default function App() {
         </div>
 
         {/* Skills Section */}
-        <div className="mb-16">
-          <h2 className="text-center mb-8">المهارات</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="py-8 border-b">
+          <h2 className="text-right mb-6">المهارات</h2>
+          <div className="flex flex-wrap gap-2 justify-end">
             {skills.map((skill) => (
-              <SkillBadge key={skill.name} {...skill} />
+              <SkillBadge key={skill} name={skill} />
             ))}
           </div>
         </div>
 
         {/* Projects Section */}
-        <div className="mb-16">
-          <h2 className="text-center mb-8">المشاريع</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="py-8 border-b">
+          <h2 className="text-right mb-6">المشاريع</h2>
+          <div className="space-y-4">
             {projects.map((project) => (
               <ProjectCard key={project.title} {...project} />
             ))}
@@ -155,9 +186,9 @@ export default function App() {
         </div>
 
         {/* Certificates Section */}
-        <div className="mb-16">
-          <h2 className="text-center mb-8">الشهادات</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="py-8 border-b">
+          <h2 className="text-right mb-6">الشهادات</h2>
+          <div className="space-y-4">
             {certificates.map((cert) => (
               <CertificateCard key={cert.title} {...cert} />
             ))}
@@ -165,17 +196,13 @@ export default function App() {
         </div>
 
         {/* Testimonials Section */}
-        <div className="mb-16">
-          <h2 className="text-center mb-8">آراء العملاء</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial) => (
-              <TestimonialCard key={testimonial.name} {...testimonial} />
-            ))}
-          </div>
+        <div className="py-8">
+          <h2 className="text-right mb-6">آراء العملاء</h2>
+          <TestimonialsSlider testimonials={testimonials} />
         </div>
 
         {/* Footer */}
-        <footer className="text-center text-muted-foreground mt-16 pt-8 border-t">
+        <footer className="text-center text-muted-foreground py-8 border-t">
           <p>© ٢٠٢٥ جميع الحقوق محفوظة</p>
         </footer>
       </div>
